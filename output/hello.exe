@@ -1,0 +1,51 @@
+CMakeLists.txt
+cmake_minimum_required(VERSION 3.10)
+project(HelloWorld)
+
+set(CMAKE_CXX_STANDARD 11)
+
+enable_testing()
+
+add_executable(hello hello.cpp)
+
+include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+
+add_subdirectory(googletest)
+
+add_executable(hello_test tests/hello_test.cpp)
+target_link_libraries(hello_test gtest gtest_main)
+add_test(NAME HelloTest COMMAND hello_test)
+
+tests/hello_test.cpp
+#include <gtest/gtest.h>
+
+TEST(HelloTest, BasicAssertions) {
+    EXPECT_EQ(1, 1);
+    EXPECT_TRUE(true);
+}
+
+README.md
+# Project Name
+
+## Build and Run Tests
+
+To build the project and run the tests using googletest, follow these steps:
+
+1. Clone the repository.
+2. Create a build directory:
+   ```
+   mkdir build
+   cd build
+   ```
+3. Run CMake:
+   ```
+   cmake ..
+   ```
+4. Build the project:
+   ```
+   make
+   ```
+5. Run the tests:
+   ```
+   ./hello_test
+   ```
